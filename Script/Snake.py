@@ -25,6 +25,11 @@ cuadro = 15
 
 font = pygame.font.SysFont('Arial', 25)
 
+
+azarManzanaX = round(random.randrange(0, 300 - 10)/10.0)*10.0
+azarManzanaY = round(random.randrange(0, 300 - 10)/10.0)*10.0
+
+
 def message_to_screen(msg, color):
     textSur, textRect = text_objetos(msg, color)
     textRect.center = (800) , (500)
@@ -81,3 +86,9 @@ while not gameExit:
     superficie.fill(Blanco)
     pygame.display.update()
     reloj.tick(cuadro)
+message_to_screen("Has perdido", Rojo)
+pygame.display.update()
+time.sleep(3)
+    
+pygame.quit()
+quit()
