@@ -44,3 +44,8 @@ while not gameExit:
 
     if mover_x >= ancho or mover_x < 0 or mover_y >= altura or mover_y < 0:
         gameExit = True
+    
+    pygame.draw.rect(superficie, Rojo, [azarManzanaX, azarManzanaY, 10, 10]) 
+    superficie.fill(Blanco)
+    pygame.display.update()
+    reloj.tick(cuadro)
