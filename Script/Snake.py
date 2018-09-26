@@ -40,3 +40,7 @@ while not gameExit:
         elif event.key == pygame.K_DOWN:
             mover_y_cambio = serp_tamano
             mover_x_cambio = 0
+
+
+    if mover_x >= ancho or mover_x < 0 or mover_y >= altura or mover_y < 0:
+        gameExit = True
