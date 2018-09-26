@@ -13,7 +13,8 @@ Rojo = (255, 0, 0)
 pygame.init()
 superficie = pygame.display.set_mode((800,500))
 pygame.display.set_caption('Serpiente')
-
+icono = pygame.image.load("icon.png")
+pygame.display.set_icon(icono)
 mover_x = 300
 mover_y = 300
 mover_x_cambio = 0
@@ -22,7 +23,8 @@ serp_tamano = 10
 ancho = 800
 altura = 500
 cuadro = 15
-
+gameOver = False
+gameExit = False
 font = pygame.font.SysFont('Arial', 25)
 
 def serpiente(serp_tamano, listaSerpiente):
@@ -85,7 +87,7 @@ while not gameExit:
         message_to_screen("Para continuar presionar C, terminar presionar Q", Rojo, 50)
         for event in pygame.event.get():
             if event.type == pygame.KEYDOWN:
-                if event.key pygame.K_q:
+                if event.key ==  pygame.K_q:
                     gameExit = True
                     gameOver = False
                 if event.key == pygame.K_c:
@@ -107,7 +109,7 @@ while not gameExit:
         elif event.key == pygame.K_DOWN:
             mover_y_cambio = serp_tamano
             mover_x_cambio = 0
-        elif event.key == pygame.K_p
+        elif event.key == pygame.K_p:
             pausa()
 
     if mover_x >= ancho or mover_x < 0 or mover_y >= altura or mover_y < 0:
