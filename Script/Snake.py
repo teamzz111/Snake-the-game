@@ -20,7 +20,7 @@ Azul = (0, 0, 255)
 Verde = (0, 128, 0)
 
 ancho = 800
-altura = 500
+altura = 600
 
 
 superficie = pygame.display.set_mode((ancho,altura))
@@ -37,7 +37,7 @@ reloj = pygame.time.Clock()
 serp_tamano = 20
 CPS = 15
 
-font = pygame.font.SysFont("arial.ttf", 35)
+font = pygame.font.SysFont("Arial", 35)
       
 
 def pausa():
