@@ -22,3 +22,21 @@ serp_tamano = 10
 ancho = 800
 altura = 500
 cuadro = 15
+
+while not gameExit:
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+            gameExit = True
+    if event.type == pygame.KEYDOWN:
+        if event.key == pygame.K_LEFT:
+            mover_x_cambio = -serp_tamano
+            mover_y_cambio = 0
+        elif event.key == pygame.K_RIGHT:
+            mover_x_cambio = serp_tamano
+            mover_y_cambio = 0
+        elif event.key == pygame.K_UP:
+            mover_y_cambio = -serp_tamano
+            mover_x_cambio = 0
+        elif event.key == pygame.K_DOWN:
+            mover_y_cambio = serp_tamano
+            mover_x_cambio = 0
