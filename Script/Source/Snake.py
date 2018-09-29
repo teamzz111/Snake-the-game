@@ -4,6 +4,7 @@ import pygame
 import time
 import os, pygame
 import random
+import sys
 
 def load_image(name):
     path = os.path.join('', name)
@@ -59,17 +60,20 @@ def pausa():
 
                 elif event.key == pygame.K_q:
                     pygame.quit()
-                    quit()
-        background = load_image('25.jpg')
+                    sys.exit()
+
+        background = load_image('FONDO jp-01.png')
         superficie.blit(background, [0, 0])
         #superficie.fill(blanco)      
-        message_to_screen("Pausa", Negro, -100)
+        message_to_screen("ACTUALMENTE ESTÁS EN PAUSA", Negro, -100)
+        message_to_screen("PARA CONTINUAR PRESIONA C", Negro, 0);
+        message_to_screen("PARA SALIR PRESIONA Q", Negro, 50)
         pygame.display.update()
         reloj.tick(5)
 
 
-def puntos(score, rapidez):
-    text = font.render("Puntos: "+str(score)+ " Rapidez: " + str(rapidez), True, Negro)
+def puntoss(puntos, rapidez):
+    text = font.render("Puntos: "+str(puntos)+ " Rapidez: " + str(rapidez), True, Negro)
     superficie.blit(text, [0,0])
     
 
@@ -79,13 +83,13 @@ def intro_juego():
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 pygame.quit()
-                quit()
+                sys.exit()
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_c:
                     intro = False
                 if event.key == pygame.K_q:
                     pygame.quit()
-                    quit()
+                    sys.exit()
 
         background = load_image('FONDO jp-01.png')
         superficie.blit(background, [0, 0])
@@ -94,7 +98,7 @@ def intro_juego():
         message_to_screen("teclas flechas de movimiento para comer manzanas", Azul, -50)
         message_to_screen("Si la serpiente toca manzana verde, la rapidez aumenta en 1 ", Azul, 0)
         message_to_screen(" Si la serpiente toca manzana lila, la serpiente se alarga 10 cuadrados.", Negro,50)
-        message_to_screen(" Si la serpiente toca manzana roja, además de crecer 1 cuadro, aumenta puntaje en 1",Azul, 100)
+        message_to_screen(" Si la serpiente toca manzana roja, ademas de crecer 1 cuadro, aumenta puntaje en 1",Azul, 100)
         message_to_screen(", y cada 3 puntos la rapidez aumenta en 1.", Negro, 150)
         message_to_screen("Si la serpiente toca bordes o a si misma, pierdes.", Azul, 200)
         message_to_screen("Para pausar partida, presiona tecla P.", Azul, 250)
@@ -131,7 +135,7 @@ def gameLoop():
     listaSerpiente = []
     largoSerpiente = 1
     rapidez = 10
-    puntos
+    puntos = 0
 
     azarManzanaX = round(random.randrange(0, ancho - 20)/20.0)*20.0
     azarManzanaY = round(random.randrange(0, altura - 20)/20.0)*20.0
@@ -218,31 +222,39 @@ def gameLoop():
 
 
         serpiente(serp_tamano,listaSerpiente)
-        puntos(largoSerpiente-1, rapidez-9)
+        puntoss(puntos, rapidez)
         pygame.display.update()
 
         
 
         if mover_x == azarManzanaX and mover_y == azarManzanaY: 
             pygame.mixer.music.load("Sonig.ogg")
-            azarManzanaX = round(random.randrange(0, 300-20)/20.0)*20.0
-            azarManzanaY = round(random.randrange(0, 300-20)/20.0)*20.0
+            azarManzanaX = round(random.randrange(0, ancho-20)/20.0)*20.0
+            azarManzanaY = round(random.randrange(0, altura-20)/20.0)*20.0
             pygame.mixer.music.play(0)
-            puntos++
-            if (puntos) % 3 == 0 and largoSerpiente != 1:
-                rapidez = int(rapidez) + 1
+            puntos = puntos + 1 
+            if puntos % 3 == 0 and largoSerpiente != 1:
+                rapidez += 1
             largoSerpiente += 1
 
         elif mover_x == azarManzanaXV and mover_y == azarManzanaYV: 
             rapidez += 1
+            azarManzanaXV = round(random.randrange(0, ancho-20)/20.0)*20.0
+            azarManzanaYV = round(random.randrange(0, altura-20)/20.0)*20.0
+            pygame.mixer.music.load("Sonig.ogg")
+            pygame.mixer.music.play(0)
         elif mover_x == azarManzanaXL and mover_y == azarManzanaYL: 
+            azarManzanaXL = round(random.randrange(0, ancho-20)/20.0)*20.0
+            pygame.mixer.music.load("Sonig.ogg")
+            azarManzanaYL = round(random.randrange(0, altura-20)/20.0)*20.0
             largoSerpiente += 10
+            pygame.mixer.music.play(0)
 
-        reloj.tick(int(rapidez))
+        reloj.tick(rapidez)
 
 
     pygame.quit()
-    quit()
+    sys.exit()
 
 intro_juego()
 gameLoop()
