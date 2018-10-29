@@ -18,7 +18,7 @@ pygame.display.set_icon(icono)
 
 Blanco = (255, 255, 255)
 Negro = (0, 0, 0)
-Rojo = (255, 0, 0)
+Rojo = (255, 56, 48)
 Azul = (0, 0, 255)
 Verde = (0, 128, 0)
 VerdeF = (76, 255, 0)
